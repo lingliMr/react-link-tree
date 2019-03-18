@@ -12,3 +12,113 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+/* 链路图 */
+.link-con{
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+	justify-content:center;
+}
+.link-last-student{
+	flex-direction: column;
+    margin: 10px 0;
+    display: flex;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    padding: 5px;
+    border: 1px #5aa8f8 solid;
+    align-items: self-start;
+    justify-content: center;
+	color: #5aa8f8;
+	font-size: 12px;
+	cursor: pointer;
+	transition: all 0.6s;
+}
+.link-first-teather{
+	flex-direction:column;
+	margin:10px 0;
+	display:flex;
+	width:60px;
+	height:60px;
+	border-radius:30px;
+	padding:5px;
+	border:1px #5aa8f8 solid;
+	align-items:center;
+	justify-content:center;
+	color:#5aa8f8;
+	cursor: pointer;
+	transition: all 0.6s;
+}
+.link-serve-box{
+	min-width:100px;
+	height:40px;
+	border-radius:2px;
+	border:1px #666 solid;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content:center;
+	padding:6px;
+	cursor: pointer;
+	text-align: center;
+	font-size: 12px;
+	transition: all 0.6s;
+}
+.link-status-box{
+	min-width:50px;
+	height:26px;
+	padding: 0 4px;
+	border-radius:8px;
+	color:#5aa8f8;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	cursor: pointer;
+	font-size: 12px;
+	transition: all 0.6s;
+}
+.link-status-box:hover{
+	transform: scale(1.2);
+	/* transition: all 0.6s; */
+}
+.link-children-con{
+	display:flex;
+	align-items:center;
+}
+.btn-choose{
+	background-color: #4098c7;
+	color: #fff!important;
+}
+.link-button{
+	cursor: pointer;
+	color: #5aa8f8;
+}
+.error-times{
+    width: auto;
+    height: 18px;
+    line-height: 18px;
+    border-radius: 14px;
+    background-color: red;
+    color: #fff;
+    display: inline-block;
+    text-align: center;
+    margin-left: 2px;
+    min-width: 18px;
+	padding: 0 2px;
+	font-size: 12px;
+}
+
+
+.link-children-contool .ant-tooltip-content{
+    width: 300px !important;
+}
+.link-children-contool .ant-tooltip-inner{
+    width: 300px !important;
+    max-width: 300px !important;
+}
+.link-table-overflow{
+	height:200px;
+	overflow:auto;
+	padding:10;
+}
