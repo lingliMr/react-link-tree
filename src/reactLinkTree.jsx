@@ -1,5 +1,7 @@
 // react
 import React from 'react';
+import classnames from 'classnames'
+
 import data from './data.json'
 export default class MonitorLinkCharts extends React.Component {
     constructor(props) {
@@ -50,42 +52,40 @@ export default class MonitorLinkCharts extends React.Component {
             nodes = data.map((v,index) => {
 				this.count++
 				let node
-                node = (<div key={this.count} className='link-children-con' style={{borderLeft:num > 1?'2px #666 solid':'',borderImage:index==0?'linear-gradient( transparent, transparent,#000) 0 10':index==num-1?'linear-gradient(#000,transparent, transparent) 0 10':''}}>
-                    <div style={{width:20,height:2,backgroundColor:v.type=='retry_pull'||v.type=='connect'?'red':'#7a7a7a'}}></div>
+                node = (<div key={this.count} className={classnames({'link-children-con':true,'borderLeft':num > 1,'borderImage':index==0,'borderImageReversal':index==num-1})}>
+                    <div className={classnames({'line20px':true,'linered':v.type=='retry_pull'||v.type=='connect'})}></div>
                         <div 
                             onClick={()=>this.chooseTab(v,'pulllink',v.id)} 
-                            className={choose == v.id ? "link-status-box btn-choose " : "link-status-box"} 
-                            style={{border:v.type=='retry_pull'||v.type=='connect'?'2px red dashed':v.type=='disconnect'?'2px #666 dashed':'2px #5aa8f8 dashed',color:v.type=='retry_pull'||v.type=='connect'?'red':v.type=='disconnect'?'#666':'#5aa8f8'}}
+                            className={classnames({'link-status-box':true,'btn-choose':choose == v.id,'linkStatusBorderD':true,'linkStatusBorderError':v.type=='retry_pull'||v.type=='connect','linkStatusBorderE':v.type=='disconnect'})}  
                             >
                             {v.type=='retry_pull'||v.type=='connect'? `pullfail` : v.type=='disconnect'?`end`:'normal'}
                             {v.type=='retry_pull'?<span className="error-times"> {v.errNum}</span> : null}
                         </div>
-                    <div style={{width:30,height:2,backgroundColor:v.type=='retry_pull'||v.type=='connect'?'red':'#7a7a7a'}}></div>
-                    <div style={{height:10,lineHeight:'7px',color:v.type=='retry_pull'||v.type=='connect'?'red':'#333'}}>></div>
-                    <div className={choose == v.userId ? "link-last-student btn-choose " : "link-last-student"} style={{border:v.type=='disconnect'?'1px #666 solid':'1px #5aa8f8 solid',color:v.type=='disconnect'?'#666':'#5aa8f8'}} onClick={()=>this.chooseTab(v,'拉流客户端',v.userId)}>
+                    <div className={classnames({'line30px':true,'linered':v.type=='retry_pull'||v.type=='connect'})}></div>
+                    <div className={classnames({'arrowLink':true,'red':v.type=='retry_pull'||v.type=='connect'})}>></div>
+                    <div className={classnames({'link-last-student':true,'btn-choose':choose == v.userId,'linkStatusClientBorderD':true,'linkStatusClientBorderE':v.type=='disconnect'})} onClick={()=>this.chooseTab(v,'拉流客户端',v.userId)}>
                         <span>{v.userId}</span>
                         <span>{v.userName}</span>
                     </div>
                 </div>)
                 if (v.children && v.children.length) {
-                    node = (<div key={this.count} className='link-children-con' style={{borderLeft:num > 1?'2px #666 solid':'',borderImage:index==0?'linear-gradient( transparent, transparent,#000) 0 10':index==num-1?'linear-gradient(#000,transparent, transparent) 0 10':''}}>
-                                <div style={{display:'flex',alignItems:'center',justifyContent:'center',}}>
-                                    <div style={{width:15,height:2,backgroundColor:v.type=='connect'?'red':'#7a7a7a'}}></div>
+                    node = (<div key={this.count} className={classnames({'link-children-con':true,'borderLeft':num > 1,'borderImage':index==0,'borderImageReversal':index==num-1})}>
+                                <div className='link-con'>
+                                    <div className={classnames({'line15px':true,'linered':v.type=='connect'})}></div>
 										<div 
 											onClick={()=>this.chooseTab(v,'link',v.id)} 
-											className={choose == v.id ? "link-status-box btn-choose " : "link-status-box"} 
-											style={{border:v.type=='connect'?'2px red dashed':v.type=='disconnect'?'2px #666 dashed':'2px #5aa8f8 dashed',color:v.type=='connect'?'red':v.type=='disconnect'?'#666':'#5aa8f8'}}
+											className={classnames({'link-status-box':true,'btn-choose':choose == v.id,'linkStatusBorderD':true,'linkStatusBorderError':v.type=='connect','linkStatusBorderE':v.type=='disconnect'})} 
 										>
 											{v.type=='connect'&& num==0 ?`pushfail`:v.type=='connect' ?'pullfail':v.type=='disconnect'?`end`:'normal'}
 											{v.type=='connect'? v.errNum  : ''}
 										</div>
-									<div style={{width:20,height:2,backgroundColor:v.type=='connect'?'red':'#7a7a7a'}}></div>
-                                    <div style={{height:10,lineHeight:'7px',color:v.type=='connect'?'red':'#333'}}>></div>
-                                    <div className={choose == v.serverIp ? "link-serve-box btn-choose " : "link-serve-box"} onClick={()=>this.chooseTab(v,'server')}>
+									<div className={classnames({'line20px':true,'linered':v.type=='connect'})}></div>
+                                    <div className={classnames({'arrowLink':true,'red':v.type=='connect'})}>></div>
+                                    <div className={classnames({'link-serve-box':true,'btn-choose':choose == v.serverIp})} onClick={()=>this.chooseTab(v,'server')}>
                                         <div>server</div>
                                         <div>{v.serverIp}</div>
                                     </div>
-                                    <div style={{width:10,height:2,backgroundColor:v.type==1?'red':'#7a7a7a'}}></div>
+                                    <div className={classnames({'line10px':true,'linered':v.type=='connect'})}></div>
                                 </div>
                                  {this.markNode(v.children,v.children.length)}
                             </div>
@@ -97,7 +97,7 @@ export default class MonitorLinkCharts extends React.Component {
         return (
 			<div className='link-con'>
 				{num==0&&first?<div onClick={()=>this.chooseTab(first,'pullClient')}>
-						<span className={choose == first.userId ? "link-first-teather btn-choose " : "link-first-teather"}>
+						<span className={classnames({'link-first-teather':true,'btn-choose':choose == first.userId})}>
 							<span>{first.userId}</span>
 							<span>{first.userName}</span>
 						</span>
